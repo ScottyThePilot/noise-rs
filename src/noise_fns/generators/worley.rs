@@ -6,6 +6,8 @@ use crate::{
 };
 use alloc::rc::Rc;
 
+pub use crate::core::worley::ReturnType;
+
 /// Noise function that outputs Worley noise.
 #[derive(Clone)]
 pub struct Worley {
@@ -24,7 +26,7 @@ pub struct Worley {
     perm_table: PermutationTable,
 }
 
-type DistanceFunction = dyn Fn(&[f64], &[f64]) -> f64;
+pub type DistanceFunction = dyn Fn(&[f64], &[f64]) -> f64;
 
 impl Worley {
     pub const DEFAULT_SEED: u32 = 0;
