@@ -51,7 +51,8 @@ where
     Source2: NoiseFn<T, DIM>,
     Control: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
+        let point = point.into();
         let lower = self.source1.get(point);
         let upper = self.source2.get(point);
         let control = self.control.get(point);

@@ -28,7 +28,7 @@ impl<T, Source, const DIM: usize> NoiseFn<T, DIM> for Negate<T, Source, DIM>
 where
     Source: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
         -self.source.get(point)
     }
 }

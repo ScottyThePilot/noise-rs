@@ -70,7 +70,8 @@ where
     Source2: NoiseFn<T, DIM>,
     Control: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
+        let point = point.into();
         let control_value = self.control.get(point);
         let (lower, upper) = self.bounds;
 

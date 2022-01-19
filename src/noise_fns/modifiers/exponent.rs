@@ -43,7 +43,7 @@ impl<T, Source, const DIM: usize> NoiseFn<T, DIM> for Exponent<T, Source, DIM>
 where
     Source: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
         let mut value = self.source.get(point);
         value = (value + 1.0) / 2.0;
         value = value.abs();

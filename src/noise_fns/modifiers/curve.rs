@@ -79,7 +79,7 @@ impl<T, Source, const DIM: usize> NoiseFn<T, DIM> for Curve<T, Source, DIM>
 where
     Source: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
         // confirm that there's at least 4 control points in the vector.
         assert!(self.control_points.len() >= 4);
 

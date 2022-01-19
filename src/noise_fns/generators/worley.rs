@@ -96,35 +96,35 @@ impl Seedable for Worley {
 }
 
 impl NoiseFn<f64, 2> for Worley {
-    fn get(&self, point: [f64; 2]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
         worley_2d(
             &self.perm_table,
             &*self.distance_function,
             self.return_type,
-            (Vector2::from(point) * self.frequency).into_array(),
+            (Vector2::from(point.into()) * self.frequency).into_array(),
         )
     }
 }
 
 impl NoiseFn<f64, 3> for Worley {
-    fn get(&self, point: [f64; 3]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
         worley_3d(
             &self.perm_table,
             &*self.distance_function,
             self.return_type,
-            (Vector3::from(point) * self.frequency).into_array(),
+            (Vector3::from(point.into()) * self.frequency).into_array(),
         )
     }
 }
 
 #[allow(clippy::cognitive_complexity)]
 impl NoiseFn<f64, 4> for Worley {
-    fn get(&self, point: [f64; 4]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
         worley_4d(
             &self.perm_table,
             &*self.distance_function,
             self.return_type,
-            (Vector4::from(point) * self.frequency).into_array(),
+            (Vector4::from(point.into()) * self.frequency).into_array(),
         )
     }
 }

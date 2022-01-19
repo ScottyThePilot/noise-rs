@@ -56,8 +56,8 @@ impl Seedable for OpenSimplex {
 ///
 /// This is a slower but higher quality form of gradient noise than `Perlin` 2D.
 impl NoiseFn<f64, 2> for OpenSimplex {
-    fn get(&self, point: [f64; 2]) -> f64 {
-        open_simplex_2d(point, &self.perm_table)
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        open_simplex_2d(point.into(), &self.perm_table)
     }
 }
 
@@ -65,8 +65,8 @@ impl NoiseFn<f64, 2> for OpenSimplex {
 ///
 /// This is a slower but higher quality form of gradient noise than `Perlin` 3D.
 impl NoiseFn<f64, 3> for OpenSimplex {
-    fn get(&self, point: [f64; 3]) -> f64 {
-        open_simplex_3d(point, &self.perm_table)
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        open_simplex_3d(point.into(), &self.perm_table)
     }
 }
 
@@ -74,7 +74,7 @@ impl NoiseFn<f64, 3> for OpenSimplex {
 ///
 /// This is a slower but higher quality form of gradient noise than `Perlin` 4D.
 impl NoiseFn<f64, 4> for OpenSimplex {
-    fn get(&self, point: [f64; 4]) -> f64 {
-        open_simplex_4d(point, &self.perm_table)
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
+        open_simplex_4d(point.into(), &self.perm_table)
     }
 }

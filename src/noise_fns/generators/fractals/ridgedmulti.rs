@@ -164,8 +164,8 @@ impl<T> NoiseFn<f64, 2> for RidgedMulti<T>
 where
     T: NoiseFn<f64, 2>,
 {
-    fn get(&self, point: [f64; 2]) -> f64 {
-        let mut point = Vector2::from(point);
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        let mut point = Vector2::from(point.into());
 
         let mut result = 0.0;
         let mut weight = 1.0;
@@ -215,8 +215,8 @@ impl<T> NoiseFn<f64, 3> for RidgedMulti<T>
 where
     T: NoiseFn<f64, 3>,
 {
-    fn get(&self, point: [f64; 3]) -> f64 {
-        let mut point = Vector3::from(point);
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        let mut point = Vector3::from(point.into());
 
         let mut result = 0.0;
         let mut weight = 1.0;
@@ -266,8 +266,8 @@ impl<T> NoiseFn<f64, 4> for RidgedMulti<T>
 where
     T: NoiseFn<f64, 4>,
 {
-    fn get(&self, point: [f64; 4]) -> f64 {
-        let mut point = Vector4::from(point);
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
+        let mut point = Vector4::from(point.into());
 
         let mut result = 0.0;
         let mut weight = 1.0;

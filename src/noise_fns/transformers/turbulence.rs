@@ -120,7 +120,8 @@ where
     Source: NoiseFn<f64, 2>,
     F: Default + Seedable + NoiseFn<f64, 2>,
 {
-    fn get(&self, point: [f64; 2]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        let point = point.into();
         // First, create offsets based on the input values to keep the sampled
         // points from being near a integer boundary. This is a result of
         // using perlin noise, which returns zero at integer boundaries.
@@ -142,7 +143,8 @@ where
     Source: NoiseFn<f64, 3>,
     F: Default + Seedable + NoiseFn<f64, 3>,
 {
-    fn get(&self, point: [f64; 3]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        let point = point.into();
         // First, create offsets based on the input values to keep the sampled
         // points from being near a integer boundary. This is a result of
         // using perlin noise, which returns zero at integer boundaries.
@@ -171,7 +173,8 @@ where
     Source: NoiseFn<f64, 4>,
     F: Default + Seedable + NoiseFn<f64, 4>,
 {
-    fn get(&self, point: [f64; 4]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
+        let point = point.into();
         // First, create offsets based on the input values to keep the sampled
         // points from being near a integer boundary. This is a result of
         // using perlin noise, which returns zero at integer boundaries.

@@ -37,7 +37,8 @@ where
     Source1: NoiseFn<T, DIM>,
     Source2: NoiseFn<T, DIM>,
 {
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
+        let point = point.into();
         self.source1.get(point) + self.source2.get(point)
     }
 }

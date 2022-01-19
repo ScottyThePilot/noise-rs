@@ -40,8 +40,9 @@ impl Default for Checkerboard {
 }
 
 impl<const N: usize> NoiseFn<f64, N> for Checkerboard {
-    fn get(&self, point: [f64; N]) -> f64 {
+    fn get(&self, point: impl Into<[f64; N]>) -> f64 {
         let result = point
+            .into()
             .iter()
             .map(|&a| a.floor() as isize)
             .reduce(|a, b| (a & self.size as isize) ^ (b & self.size as isize))

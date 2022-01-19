@@ -107,7 +107,8 @@ impl<Source> NoiseFn<f64, 2> for TranslatePoint<Source>
 where
     Source: NoiseFn<f64, 2>,
 {
-    fn get(&self, point: [f64; 2]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        let point = point.into();
         self.source
             .get([point[0] + self.x_translation, point[1] + self.y_translation])
     }
@@ -117,7 +118,8 @@ impl<Source> NoiseFn<f64, 3> for TranslatePoint<Source>
 where
     Source: NoiseFn<f64, 3>,
 {
-    fn get(&self, point: [f64; 3]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        let point = point.into();
         self.source.get([
             point[0] + self.x_translation,
             point[1] + self.y_translation,
@@ -130,7 +132,8 @@ impl<Source> NoiseFn<f64, 4> for TranslatePoint<Source>
 where
     Source: NoiseFn<f64, 4>,
 {
-    fn get(&self, point: [f64; 4]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
+        let point = point.into();
         self.source.get([
             point[0] + self.x_translation,
             point[1] + self.y_translation,

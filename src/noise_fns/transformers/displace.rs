@@ -50,7 +50,8 @@ where
     XDisplace: NoiseFn<f64, 2>,
     YDisplace: NoiseFn<f64, 2>,
 {
-    fn get(&self, point: [f64; 2]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        let point = point.into();
         // Get the output values from the displacement functions and add them to
         // the corresponding coordinate in the input value. Since this is a 2d
         // function, we only need the x_displace and y_displace functions.
@@ -71,7 +72,8 @@ where
     YDisplace: NoiseFn<f64, 3>,
     ZDisplace: NoiseFn<f64, 3>,
 {
-    fn get(&self, point: [f64; 3]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        let point = point.into();
         // Get the output values from the displacement functions and add them to
         // the corresponding coordinate in the input value. Since this is a 3d
         // function, we only need the x_displace, y_displace, and z_displace
@@ -95,7 +97,8 @@ where
     ZDisplace: NoiseFn<f64, 4>,
     UDisplace: NoiseFn<f64, 4>,
 {
-    fn get(&self, point: [f64; 4]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 4]>) -> f64 {
+        let point = point.into();
         // Get the output values from the displacement functions and add them to
         // the corresponding coordinate in the input value. Since this is a 4d
         // function, we need all of the displace functions. Panic if there is no z-

@@ -50,14 +50,14 @@ impl Seedable for SuperSimplex {
 
 /// 2-dimensional Super Simplex noise
 impl NoiseFn<f64, 2> for SuperSimplex {
-    fn get(&self, point: [f64; 2]) -> f64 {
-        super_simplex_2d(point, &self.perm_table)
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        super_simplex_2d(point.into(), &self.perm_table)
     }
 }
 
 /// 3-dimensional Super Simplex noise
 impl NoiseFn<f64, 3> for SuperSimplex {
-    fn get(&self, point: [f64; 3]) -> f64 {
-        super_simplex_3d(point, &self.perm_table)
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        super_simplex_3d(point.into(), &self.perm_table)
     }
 }

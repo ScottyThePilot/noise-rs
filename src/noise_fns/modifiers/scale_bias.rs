@@ -48,12 +48,12 @@ where
     Source: NoiseFn<T, DIM>,
 {
     #[cfg(not(target_os = "emscripten"))]
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
         (self.source.get(point)).mul_add(self.scale, self.bias)
     }
 
     #[cfg(target_os = "emscripten")]
-    fn get(&self, point: [T; DIM]) -> f64 {
+    fn get(&self, point: impl Into<[T; DIM]>) -> f64 {
         (self.source.get(point) * self.scale) + self.bias
     }
 }

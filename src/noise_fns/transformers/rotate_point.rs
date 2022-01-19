@@ -81,7 +81,8 @@ impl<Source> NoiseFn<f64, 2> for RotatePoint<Source>
 where
     Source: NoiseFn<f64, 2>,
 {
-    fn get(&self, point: [f64; 2]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 2]>) -> f64 {
+        let point = point.into();
         // In two dimensions, the plane is _xy_, and we rotate around the
         // z-axis.
         let x = point[0];
@@ -101,7 +102,8 @@ impl<Source> NoiseFn<f64, 3> for RotatePoint<Source>
 where
     Source: NoiseFn<f64, 3>,
 {
-    fn get(&self, point: [f64; 3]) -> f64 {
+    fn get(&self, point: impl Into<[f64; 3]>) -> f64 {
+        let point = point.into();
         // In three dimensions, we could rotate around any of the x, y, or z
         // axes. Need a more complicated function to handle this case.
         let x_cos = self.x_angle.to_radians().cos();
@@ -135,7 +137,7 @@ impl<Source> NoiseFn<f64, 4> for RotatePoint<Source>
 where
     Source: NoiseFn<f64, 4>,
 {
-    fn get(&self, _point: [f64; 4]) -> f64 {
+    fn get(&self, _point: impl Into<[f64; 4]>) -> f64 {
         // 4d rotations are hard.
         unimplemented!();
     }

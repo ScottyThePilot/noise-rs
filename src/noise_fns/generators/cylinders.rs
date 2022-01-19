@@ -32,7 +32,8 @@ impl Default for Cylinders {
 }
 
 impl<const N: usize> NoiseFn<f64, N> for Cylinders {
-    fn get(&self, point: [f64; N]) -> f64 {
+    fn get(&self, point: impl Into<[f64; N]>) -> f64 {
+        let point = point.into();
         // Scale the inputs by the frequency.
         let x = point[0] * self.frequency;
         let y = point[1] * self.frequency;
