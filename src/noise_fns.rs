@@ -41,6 +41,14 @@ pub trait NoiseFn<T, const DIM: usize> {
         Add::new(self, other)
     }
 
+    fn add_constant(self, value: f64) -> Add<T, Self, Constant, DIM>
+    where
+        T: Copy,
+        Self: Sized,
+    {
+        Add::new(self, Constant::new(value))
+    }
+
     fn blend<Other, Control>(self, other: Other, control: Control) -> Blend<T, Self, Other, Control, DIM>
     where
         Self: Sized,
@@ -62,6 +70,13 @@ pub trait NoiseFn<T, const DIM: usize> {
         Self: Sized,
     {
         Clamp::new(self)
+    }
+
+    fn clamp_by(self, lower_bound: f64, upper_bound: f64) -> Clamp<T, Self, DIM>
+    where
+        Self: Sized,
+    {
+        Clamp::new(self).set_bounds(lower_bound, upper_bound)
     }
 
     fn curve(self) -> Curve<T, Self, DIM>
@@ -123,12 +138,27 @@ pub trait NoiseFn<T, const DIM: usize> {
         Exponent::new(self)
     }
 
+    fn exponent_by(self, exponent: f64) -> Exponent<T, Self, DIM>
+    where
+        Self: Sized,
+    {
+        Exponent::new(self).set_exponent(exponent)
+    }
+
     fn max<Other>(self, other: Other) -> Max<T, Self, Other, DIM>
     where
         Self: Sized,
         Other: NoiseFn<T, DIM>
     {
         Max::new(self, other)
+    }
+
+    fn max_constant(self, value: f64) -> Max<T, Self, Constant, DIM>
+    where
+        T: Copy,
+        Self: Sized,
+    {
+        Max::new(self, Constant::new(value))
     }
 
     fn min<Other>(self, other: Other) -> Min<T, Self, Other, DIM>
@@ -139,12 +169,28 @@ pub trait NoiseFn<T, const DIM: usize> {
         Min::new(self, other)
     }
 
+    fn min_constant(self, value: f64) -> Min<T, Self, Constant, DIM>
+    where
+        T: Copy,
+        Self: Sized,
+    {
+        Min::new(self, Constant::new(value))
+    }
+
     fn multiply<Other>(self, other: Other) -> Multiply<T, Self, Other, DIM>
     where
         Self: Sized,
         Other: NoiseFn<T, DIM>
     {
         Multiply::new(self, other)
+    }
+
+    fn multiply_constant(self, value: f64) -> Multiply<T, Self, Constant, DIM>
+    where
+        T: Copy,
+        Self: Sized
+    {
+        Multiply::new(self, Constant::new(value))
     }
 
     fn negate(self) -> Negate<T, Self, DIM>
@@ -162,11 +208,27 @@ pub trait NoiseFn<T, const DIM: usize> {
         Power::new(self, other)
     }
 
+    fn power_constant(self, value: f64) -> Power<T, Self, Constant, DIM>
+    where
+        T: Copy,
+        Self: Sized,
+    {
+        Power::new(self, Constant::new(value))
+    }
+
     fn rotate_point(self) -> RotatePoint<Self>
     where
         Self: Sized,
     {
         RotatePoint::new(self)
+    }
+
+    fn rotate_point_by(self, args: impl TransformerArgs) -> RotatePoint<Self>
+    where
+        Self: Sized,
+    {
+        let [x, y, z, u] = args.expand(0.0);
+        RotatePoint::new(self).set_angles(x, y, z, u)
     }
 
     fn scale_bias(self) -> ScaleBias<T, Self, DIM>
@@ -181,6 +243,14 @@ pub trait NoiseFn<T, const DIM: usize> {
         Self: Sized,
     {
         ScalePoint::new(self)
+    }
+
+    fn scale_point_by(self, args: impl TransformerArgs) -> ScalePoint<Self>
+    where
+        Self: Sized,
+    {
+        let [x, y, z, u] = args.expand(1.0);
+        ScalePoint::new(self).set_all_scales(x, y, z, u)
     }
 
     fn select<Other, Control>(self, other: Other, control: Control) -> Select<T, Self, Other, Control, DIM>
@@ -204,6 +274,14 @@ pub trait NoiseFn<T, const DIM: usize> {
         Self: Sized,
     {
         TranslatePoint::new(self)
+    }
+
+    fn translate_point_by(self, args: impl TransformerArgs) -> TranslatePoint<Self>
+    where
+        Self: Sized,
+    {
+        let [x, y, z, u] = args.expand(0.0);
+        TranslatePoint::new(self).set_all_translations(x, y, z, u)
     }
 
     fn turbulence<F>(self) -> Turbulence<Self, F>
