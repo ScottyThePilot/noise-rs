@@ -10,6 +10,7 @@ pub trait NoiseMapBuilder<SourceModule> {
     fn build(&self) -> NoiseMap;
 }
 
+#[derive(Clone, Debug)]
 pub struct CylinderMapBuilder<SourceModule>
 where
     SourceModule: NoiseFn<f64, 3>,
@@ -133,6 +134,7 @@ where
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct PlaneMapBuilder<SourceModule>
 where
     SourceModule: NoiseFn<f64, 3>,
@@ -258,6 +260,7 @@ where
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct SphereMapBuilder<SourceModule>
 where
     SourceModule: NoiseFn<f64, 3>,

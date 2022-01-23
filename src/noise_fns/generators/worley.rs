@@ -128,3 +128,15 @@ impl NoiseFn<f64, 4> for Worley {
         )
     }
 }
+
+impl core::fmt::Debug for Worley {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        f.debug_struct("Worley")
+            .field("distance_function", &core::format_args!("..."))
+            .field("return_type", &self.return_type)
+            .field("frequency", &self.frequency)
+            .field("seed", &self.seed)
+            .field("perm_table", &self.perm_table)
+            .finish()
+    }
+}

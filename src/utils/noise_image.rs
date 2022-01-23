@@ -8,6 +8,7 @@ use core::ops::{Index, IndexMut};
 const RASTER_MAX_WIDTH: u16 = 32_767;
 const RASTER_MAX_HEIGHT: u16 = 32_767;
 
+#[derive(Clone, Debug)]
 pub struct NoiseImage {
     size: (usize, usize),
     border_color: Color,
